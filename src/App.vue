@@ -6,7 +6,14 @@ export default {
     data() {
         return {
             store,
-            userQuery: ''
+            userQuery: '',
+            languageIcons: {
+                en: 'us',
+                fr: 'fr',
+                es: 'es',
+                it: 'it',
+                de: 'de'
+            }
         }
     },
     methods: {
@@ -14,7 +21,7 @@ export default {
             axios.get(`https://api.themoviedb.org/3/search/movie?api_key=555de2072157686e83c1093586314d23&query=${this.userQuery}`)
                 .then(response => {
                     this.store.searchedMovie = response.data.results;
-                })
+                });
         }
     }
 }
@@ -38,6 +45,7 @@ export default {
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
+                <span :class="`fi fi-${languageIcons[store.searchedMovie[i].original_language]}`"></span>
                 <p class="card-text">{{ store.searchedMovie[i].original_language }}</p>
                 <p class="card-text">{{ store.searchedMovie[i].vote_average }}</p>
             </div>
