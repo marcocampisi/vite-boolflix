@@ -37,7 +37,7 @@ export default {
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
-                <p class="card-text">{{ store.searchedMovie[i].overview }}</p>
+                <p class="card-text">{{ store.searchedMovie[i].original_language }}</p>
                 <p class="card-text">{{ store.searchedMovie[i].vote_average }}</p>
             </div>
         </div>
