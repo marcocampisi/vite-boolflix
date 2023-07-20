@@ -18,7 +18,12 @@ export default {
     },
     methods: {
         getQueryMovie() {
-            axios.get(`https://api.themoviedb.org/3/search/movie?api_key=555de2072157686e83c1093586314d23&query=${this.userQuery}`)
+            axios.get(`https://api.themoviedb.org/3/search/movie`, {
+                params: {
+                    api_key: '555de2072157686e83c1093586314d23',
+                    query: this.userQuery
+                }
+            })
                 .then(response => {
                     this.store.searchedMovie = response.data.results;
                 });
