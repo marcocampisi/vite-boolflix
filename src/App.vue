@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { store } from './store.js';
 import HeaderComponent from './components/HeaderComponent.vue';
+import MainComponent from './components/MainComponent.vue';
 
 export default {
     data() {
@@ -10,7 +11,8 @@ export default {
         }
     },
     components: {
-        HeaderComponent
+        HeaderComponent,
+        MainComponent
     },
     methods: {
         getQueryContent() {
@@ -43,55 +45,8 @@ export default {
 </script>
 
 <template>
-    <HeaderComponent :getQueryContent="getQueryContent"/>
-    <div class="container">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cerca film e serie TV" v-model="store.userQuery">
-            <button class="btn btn-outline-secondary" type="button" @click="getQueryContent">Cerca</button>
-        </div>
-    </div>
-
-    <div class="container">
-        <h2>Film</h2>
-        <div class="card" v-if="(userQuery !== '' && store.searchedMovie.length > 0)"
-            v-for="(item, i) in store.searchedMovie" :key="i">
-            <div class="card-header">
-                <img :src="`https://image.tmdb.org/t/p/w342${store.searchedMovie[i].poster_path}`"
-                    :alt="store.searchedMovie[i].title">
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
-                <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
-                <span :class="`fi fi-${store.languageIcons[store.searchedMovie[i].original_language]}`"></span>
-                <div class="rating">
-                    <font-awesome-icon v-for="star in 5" :key="star"
-                        :icon="star <= getRatingStars(store.searchedMovie[i].vote_average) ? 'fas fa-star' : 'far fa-star'" />
-                </div>
-            </div>
-        </div>
-        <div v-else>
-            <h2 class="text-center">Nessun film trovato</h2>
-        </div>
-    </div>
-    <div class="container">
-        <h2>Serie TV</h2>
-        <div class="card" v-if="(userQuery !== '' && store.searchedSeries.length > 0)"
-            v-for="(item, i) in store.searchedSeries" :key="i">
-            <div class="card-header">
-                <img :src="`https://image.tmdb.org/t/p/w300${store.searchedSeries[i].poster_path}`"
-                    :alt="store.searchedSeries[i].name">
-            </div>
-            <div class="card-body">
-                <h3 class="card-title">{{ store.searchedSeries[i].name }}</h3>
-                <h5 class="card-title">{{ store.searchedSeries[i].original_name }}</h5>
-                <span :class="`fi fi-${store.languageIcons[store.searchedSeries[i].original_language]}`"></span>
-                <div class="rating">
-                    <font-awesome-icon v-for="star in 5" :key="star"
-                        :icon="star <= getRatingStars(store.searchedSeries[i].vote_average) ? 'fas fa-star' : 'far fa-star'" />
-                </div>
-            </div>
-        </div>
-    </div>
+    <HeaderComponent :getQueryContent="getQueryContent" />
+    <MainComponent :getRatingStars="getRatingStars" />
 </template>
 
 <style scoped></style>
