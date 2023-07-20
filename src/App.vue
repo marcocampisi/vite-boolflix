@@ -51,14 +51,13 @@ export default {
         <div class="card" v-if="(userQuery !== '' && store.searchedMovie.length > 0)"
             v-for="(item, i) in store.searchedMovie" :key="i">
             <div class="card-header">
-                <img :src="`https://image.tmdb.org/t/p/w300${store.searchedMovie[i].poster_path}`"
+                <img :src="`https://image.tmdb.org/t/p/w342${store.searchedMovie[i].poster_path}`"
                     :alt="store.searchedMovie[i].title">
             </div>
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
                 <span :class="`fi fi-${store.languageIcons[store.searchedMovie[i].original_language]}`"></span>
-                <p class="card-text">{{ store.searchedMovie[i].original_language }}</p>
                 <div class="rating">
                     <font-awesome-icon v-for="star in 5" :key="star"
                         :icon="star <= getRatingStars(store.searchedMovie[i].vote_average) ? 'fas fa-star' : 'far fa-star'" />
@@ -81,12 +80,11 @@ export default {
                 <h3 class="card-title">{{ store.searchedSeries[i].name }}</h3>
                 <h5 class="card-title">{{ store.searchedSeries[i].original_name }}</h5>
                 <span :class="`fi fi-${store.languageIcons[store.searchedSeries[i].original_language]}`"></span>
-                <p class="card-text">{{ store.searchedSeries[i].original_language }}</p>
-                <p class="card-text">{{ store.searchedSeries[i].vote_average }}</p>
+                <div class="rating">
+                    <font-awesome-icon v-for="star in 5" :key="star"
+                        :icon="star <= getRatingStars(store.searchedSeries[i].vote_average) ? 'fas fa-star' : 'far fa-star'" />
+                </div>
             </div>
-        </div>
-        <div v-else>
-            <h2 class="text-center">Nessuna serie trovata</h2>
         </div>
     </div>
 </template>
