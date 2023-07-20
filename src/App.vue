@@ -1,12 +1,16 @@
 <script>
 import axios from 'axios';
 import { store } from './store.js';
+import HeaderComponent from './components/HeaderComponent.vue';
 
 export default {
     data() {
         return {
             store
         }
+    },
+    components: {
+        HeaderComponent
     },
     methods: {
         getQueryContent() {
@@ -39,6 +43,7 @@ export default {
 </script>
 
 <template>
+    <HeaderComponent :getQueryContent="getQueryContent"/>
     <div class="container">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Cerca film e serie TV" v-model="store.userQuery">
