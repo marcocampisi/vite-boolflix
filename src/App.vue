@@ -5,15 +5,7 @@ import { store } from './store.js'
 export default {
     data() {
         return {
-            store,
-            userQuery: '',
-            languageIcons: {
-                en: 'us',
-                fr: 'fr',
-                es: 'es',
-                it: 'it',
-                de: 'de'
-            }
+            store
         }
     },
     methods: {
@@ -21,7 +13,7 @@ export default {
             axios.get(`https://api.themoviedb.org/3/search/movie`, {
                 params: {
                     api_key: '555de2072157686e83c1093586314d23',
-                    query: this.userQuery
+                    query: this.store.userQuery
                 }
             })
                 .then(response => {
@@ -35,7 +27,7 @@ export default {
 <template>
     <div class="container">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Cerca film" v-model="userQuery">
+            <input type="text" class="form-control" placeholder="Cerca film" v-model="store.userQuery">
             <button class="btn btn-outline-secondary" type="button" @click="getQueryMovie">Cerca</button>
         </div>
     </div>
@@ -50,7 +42,7 @@ export default {
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
-                <span :class="`fi fi-${languageIcons[store.searchedMovie[i].original_language]}`"></span>
+                <span :class="`fi fi-${store.languageIcons[store.searchedMovie[i].original_language]}`"></span>
                 <p class="card-text">{{ store.searchedMovie[i].original_language }}</p>
                 <p class="card-text">{{ store.searchedMovie[i].vote_average }}</p>
             </div>

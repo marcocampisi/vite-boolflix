@@ -1,6 +1,13 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-    name: '',
-    searchedMovie: []
+    searchedMovie: [],
+    userQuery: '',
+    languageIcons: {
+        en: 'us',
+        fr: 'fr',
+        es: 'es',
+        it: 'it',
+        de: 'de'
+    }
 });
