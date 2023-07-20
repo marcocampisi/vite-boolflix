@@ -43,12 +43,8 @@ export default {
     </div>
 
     <div class="container">
-        <div class="card" v-if="(userQuery !== '' && store.searchedMovie !== [])" v-for="(item, i) in store.searchedMovie" :key="i">
-            <div class="card-header">
-                <!-- <img :src="`https://image.tmdb.org/t/p/w500${store.searchedMovie[i].poster_path}`"
-                    :alt="store.searchedMovie[i].title"> -->
-
-            </div>
+        <div class="card" v-if="(userQuery !== '' && store.searchedMovie.length > 0)" v-for="(item, i) in store.searchedMovie"
+            :key="i">
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
@@ -62,12 +58,8 @@ export default {
         </div>
     </div>
     <div class="container">
-        <div class="card" v-if="(userQuery !== '' && store.searchedSeries !== [])" v-for="(item, i) in store.searchedSeries" :key="i">
-            <div class="card-header">
-                <!-- <img :src="`https://image.tmdb.org/t/p/w500${store.searchedMovie[i].poster_path}`"
-                    :alt="store.searchedMovie[i].title"> -->
-
-            </div>
+        <div class="card" v-if="(userQuery !== '' && store.searchedSeries.length > 0)" v-for="(item, i) in store.searchedSeries"
+            :key="i">
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedSeries[i].name }}</h3>
                 <h5 class="card-title">{{ store.searchedSeries[i].original_name }}</h5>
