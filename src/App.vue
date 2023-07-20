@@ -1,6 +1,6 @@
 <script>
 import axios from 'axios';
-import { store } from './store.js'
+import { store } from './store.js';
 
 export default {
     data() {
@@ -29,6 +29,10 @@ export default {
                 .then(response => {
                     this.store.searchedSeries = response.data.results;
                 });
+        },
+        getRatingStars(voteAverage) {
+            const roundedRating = Math.ceil(voteAverage / 2);
+            return Math.min(roundedRating, 5);
         }
     }
 }
@@ -43,14 +47,22 @@ export default {
     </div>
 
     <div class="container">
-        <div class="card" v-if="(userQuery !== '' && store.searchedMovie.length > 0)" v-for="(item, i) in store.searchedMovie"
-            :key="i">
+        <h2>Film</h2>
+        <div class="card" v-if="(userQuery !== '' && store.searchedMovie.length > 0)"
+            v-for="(item, i) in store.searchedMovie" :key="i">
+            <div class="card-header">
+                <img :src="`https://image.tmdb.org/t/p/w300${store.searchedMovie[i].poster_path}`"
+                    :alt="store.searchedMovie[i].title">
+            </div>
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedMovie[i].title }}</h3>
                 <h5 class="card-title">{{ store.searchedMovie[i].original_title }}</h5>
                 <span :class="`fi fi-${store.languageIcons[store.searchedMovie[i].original_language]}`"></span>
                 <p class="card-text">{{ store.searchedMovie[i].original_language }}</p>
-                <p class="card-text">{{ store.searchedMovie[i].vote_average }}</p>
+                <div class="rating">
+                    <font-awesome-icon v-for="star in 5" :key="star"
+                        :icon="star <= getRatingStars(store.searchedMovie[i].vote_average) ? 'fas fa-star' : 'far fa-star'" />
+                </div>
             </div>
         </div>
         <div v-else>
@@ -58,8 +70,13 @@ export default {
         </div>
     </div>
     <div class="container">
-        <div class="card" v-if="(userQuery !== '' && store.searchedSeries.length > 0)" v-for="(item, i) in store.searchedSeries"
-            :key="i">
+        <h2>Serie TV</h2>
+        <div class="card" v-if="(userQuery !== '' && store.searchedSeries.length > 0)"
+            v-for="(item, i) in store.searchedSeries" :key="i">
+            <div class="card-header">
+                <img :src="`https://image.tmdb.org/t/p/w300${store.searchedSeries[i].poster_path}`"
+                    :alt="store.searchedSeries[i].name">
+            </div>
             <div class="card-body">
                 <h3 class="card-title">{{ store.searchedSeries[i].name }}</h3>
                 <h5 class="card-title">{{ store.searchedSeries[i].original_name }}</h5>
