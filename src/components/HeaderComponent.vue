@@ -55,4 +55,10 @@ export default {
     </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header {
+    position: fixed;
+    width: 100vw;
+    z-index: 1;
+}
+</style>
